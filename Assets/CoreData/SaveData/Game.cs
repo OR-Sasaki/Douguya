@@ -1,6 +1,6 @@
 namespace CoreData
 {
-    public class Game
+    public record Game
     {
         public int Days = 1;
     }

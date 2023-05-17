@@ -1,6 +1,6 @@
 namespace CoreData
 {
-    public class GardenPlot
+    public record GardenPlot
     {
         public enum Progress
         {

@@ -6,12 +6,13 @@ public class DebugSceneManager : MonoBehaviour
 {
     void Start()
     {
-        var saveData = InitSaveData();
+        var saveData = CreateSaveData();
         
         // 仮のアイテムを投入
+        
     }
 
-    SaveData InitSaveData()
+    static SaveData CreateSaveData()
     {
         var garden = new Garden();
         garden.GardenPlots.Add(new GardenPlot());

@@ -1,6 +1,6 @@
 namespace CoreData
 {
-    public class SaveData
+    public record SaveData
     {
         public Game Game;
         public Player Player;

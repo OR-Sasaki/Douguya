@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace CoreData
 {
-    public class Player
+    public record Player
     {
         public List<PlayerItem> PlayerItems;
     }
