@@ -10,12 +10,14 @@ public class RightUIPresenter : MonoBehaviour
     [SerializeField] NoneRightUI none;
     [SerializeField] GardenPlotRightUI gardenPlot;
     [SerializeField] GameRightUI game;
+    [SerializeField] PlayerItemRightUI playerItemRightUI;
 
     void DisableAll()
     {
         none.gameObject.SetActive(false);
         gardenPlot.gameObject.SetActive(false);
         game.gameObject.SetActive(false);
+        playerItemRightUI.gameObject.SetActive(false);
     }
     
     public void OnChangeHover(int value)
@@ -35,6 +37,7 @@ public class RightUIPresenter : MonoBehaviour
             GardenPlant _ => gardenPlot,
             GardenHarvest _ => gardenPlot,
             GardenPlantSelectSeed _ => gardenPlot,
+            Item _ => playerItemRightUI,
             _ => none
         };
         currentUI.gameObject.SetActive(true);

@@ -1,35 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CoreData;
+using CoreData.Master;
 
 public class ItemMenuUI : ListMenuBase
 {
     public override void Initialize(SaveData saveData)
     {
-        SetContexts(new List<ListMenuElement.Context>
-        {
-            new()
-            {
-                Text = "アイテム１"
-            },
-            new()
-            {
-                Text = "アイテム２"
-            },
-            new()
-            {
-                Text = "アイテム３"
-            }
-        });
+        var playerItems = saveData.Player.PlayerItems;
+        var contexts = playerItems.Select((item, index)
+            => new ListMenuElement.Context { Text = $"{MasterData.I.Items[item.ItemId].Name}"});
+        SetContexts(contexts);
     }
 
     public override State NextState()
     {
-        return CurrentSelectIndex switch
-        {
-            0 => new Garden(),
-            1 => new Item(),
-            2 => new Shop(),
-            _ => new Garden()
-        };
+        return new None();
     }
 }

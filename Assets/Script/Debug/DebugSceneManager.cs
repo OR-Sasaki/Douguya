@@ -52,11 +52,28 @@ public class DebugSceneManager : MonoBehaviour
         garden.GardenPlots.Add(new GardenPlot());
         garden.GardenPlots.Add(new GardenPlot());
         garden.GardenPlots.Add(new GardenPlot());
+
+        var player = new Player();
+        player.PlayerItems.Add(new PlayerItem
+        {
+            ItemId = 1,
+            Quality = 1,
+        });
+        player.PlayerItems.Add(new PlayerItem
+        {
+            ItemId = 2,
+            Quality = 1,
+        });
+        player.PlayerItems.Add(new PlayerItem
+        {
+            ItemId = 3,
+            Quality = 1,
+        });
         
         return new SaveData
         {
             Game = new Game(),
-            Player = new Player(),
+            Player = player,
             Garden = garden
         };
     }

@@ -4,6 +4,6 @@ namespace CoreData
 {
     public record Player
     {
-        public List<PlayerItem> PlayerItems;
+        public List<PlayerItem> PlayerItems = new();
     }
 }
