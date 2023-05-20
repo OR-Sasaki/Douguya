@@ -7,6 +7,9 @@ namespace Core
     {
         public static void NextDay(CoreData.GardenPlot gardenPlot)
         {
+            if (gardenPlot.SeedId == 0)
+                return;
+            
             gardenPlot.ElapsedDaysInCurrentProgress += 1;
 
             if (gardenPlot.CurrentProgress == CoreData.GardenPlot.Progress.Collectable) return;

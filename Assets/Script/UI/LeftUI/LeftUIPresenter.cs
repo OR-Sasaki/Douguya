@@ -19,22 +19,24 @@ public class LeftUIPresenter : MonoBehaviour
     readonly Subject<State> onSelectSubject = new();
     readonly Subject<Unit> onReturnSubject = new();
     readonly Subject<int> onHoverChangeSubject = new();
+    readonly Subject<Unit> onNextDaySubject = new();
     public IObservable<State> OnSelect => onSelectSubject;
     public IObservable<Unit> OnReturn => onReturnSubject;
-    public Subject<int> OnHoverChange => onHoverChangeSubject;
-    
+    public IObservable<int> OnHoverChange => onHoverChangeSubject;
+    public IObservable<Unit> OnNextDay => onNextDaySubject;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
             currentListMenu.Next();
-            OnHoverChange.OnNext(currentListMenu.CurrentSelectIndex);
+            onHoverChangeSubject.OnNext(currentListMenu.CurrentSelectIndex);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             currentListMenu.Prev();
-            OnHoverChange.OnNext(currentListMenu.CurrentSelectIndex);
+            onHoverChangeSubject.OnNext(currentListMenu.CurrentSelectIndex);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -46,6 +48,11 @@ public class LeftUIPresenter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             onReturnSubject.OnNext(Unit.Default);
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            onNextDaySubject.OnNext(Unit.Default);
         }
     }
 

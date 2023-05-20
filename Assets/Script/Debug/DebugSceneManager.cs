@@ -20,13 +20,11 @@ public class DebugSceneManager : MonoBehaviour
         
         leftUIPresenter.OnSelect.Subscribe(state =>
         {
-            Debug.Log( $"OnSelect {typeof(State)}");
             stateManager.GoNextState(state);
         });
 
         leftUIPresenter.OnReturn.Subscribe(_ =>
         {
-            Debug.Log("OnReturn");
             stateManager.GoPrevState();
         });
 
@@ -35,9 +33,14 @@ public class DebugSceneManager : MonoBehaviour
             rightUIPresenter.OnChangeHover(value);
         });
 
+        leftUIPresenter.OnNextDay.Subscribe(value =>
+        {
+            Core.Main.NextDay(saveData);
+            stateManager.Initialize();
+        });
+
         stateManager.OnChangeState.Subscribe(state =>
         {
-            Debug.Log( $"OnChangeState {typeof(State)}");
             leftUIPresenter.Next(state, saveData);
             rightUIPresenter.Next(state, saveData);
         });
