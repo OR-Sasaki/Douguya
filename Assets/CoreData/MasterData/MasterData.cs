@@ -25,7 +25,8 @@ namespace CoreData.Master
             Instance = this;
         }
         
-        public Dictionary<int, Item> Items;
-        public Dictionary<int, Seed> Seeds;
+        public Dictionary<int, Item> Items = new();
+        public Dictionary<int, Seed> Seeds = new();
+        public Dictionary<string, int> IntConsts = new();
     }
 }

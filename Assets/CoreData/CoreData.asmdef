@@ -1,3 +1,16 @@
 {
-	"name": "CoreData"
+    "name": "CoreData",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3dffe46a0c69724489c22162b575cb8a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -12,7 +12,7 @@ namespace Core
             if (gardenPlot.CurrentProgress == CoreData.GardenPlot.Progress.Collectable) return;
             
             var seed = MasterData.I.Seeds[gardenPlot.SeedId];
-            var needDaysForNextProgress = seed.NeedDaysForNextProgress[gardenPlot.CurrentProgress];
+            var needDaysForNextProgress = seed.NeedDaysForNextProgress(gardenPlot.CurrentProgress);
             if (gardenPlot.ElapsedDaysInCurrentProgress >= needDaysForNextProgress)
             {
                 gardenPlot.ElapsedDaysInCurrentProgress = 0;
