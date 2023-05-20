@@ -4,7 +4,7 @@ using CoreData;
 
 public class GardenViewMenuUI : ListMenuBase
 {
-    public override void Initialize(SaveData saveData)
+    public override void Initialize(SaveData saveData, State state)
     {
         var gardenPlots = saveData.Garden.GardenPlots;
         var contexts = gardenPlots.Select((p, index) => new ListMenuElement.Context { Text = $"はたけ{index}"});

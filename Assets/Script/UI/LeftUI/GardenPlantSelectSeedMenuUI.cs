@@ -1,24 +1,43 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CoreData;
+using CoreData.Master;
 
 public class GardenPlantSelectSeedMenuUI : ListMenuBase
 {
-    public override void Initialize(SaveData saveData)
+    SaveData saveData;
+    IEnumerable<int> items;
+    GardenPlantSelectSeed state;
+
+    public override string Action => "Plant";
+
+    public override LeftUIActionContext ActionValue
+        => new PlantActionContext
+        {
+            PlayerItemIndex = items.ToArray()[CurrentSelectIndex],
+            GardenPlotIndex = state.GardenPlotIndex
+        };
+
+    public override void Initialize(SaveData saveData, State state)
     {
-        var gardenPlots = saveData.Garden.GardenPlots;
-        var contexts = gardenPlots.Select((p, index) => new ListMenuElement.Context { Text = $"はたけ{index}"});
+        this.saveData = saveData;
+        this.state = (GardenPlantSelectSeed)state;
+        
+        items =
+            saveData
+                .Player
+                .PlayerItems
+                .Select(p =>  MasterData.I.Items[p.ItemId])
+                .Select((i, index) => i.Type == "Seed" ? index : -1)
+                .Where(i => i >= 0);
+        
+        var contexts = items.Select((item, index)
+            => new ListMenuElement.Context { Text = $"{MasterData.I.Items[saveData.Player.PlayerItems[item].ItemId].Name}"});
         SetContexts(contexts);
     }
 
     public override State NextState()
     {
-        return CurrentSelectIndex switch
-        {
-            0 => new Garden(),
-            1 => new Item(),
-            2 => new Shop(),
-            _ => new Garden()
-        };
+        return new Garden{ Back = true };
     }
 }

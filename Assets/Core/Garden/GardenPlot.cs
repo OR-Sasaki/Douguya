@@ -1,3 +1,4 @@
+using System.Linq;
 using CoreData;
 using CoreData.Master;
 
@@ -21,6 +22,16 @@ namespace Core
                 gardenPlot.ElapsedDaysInCurrentProgress = 0;
                 gardenPlot.CurrentProgress++;
             }
+        }
+
+        public static void Plant(SaveData saveData, CoreData.GardenPlot gardenPlot, int playerItemIndex)
+        {
+            var playerItem = saveData.Player.PlayerItems[playerItemIndex];
+            saveData.Player.PlayerItems.RemoveAt(playerItemIndex);
+
+            var item = MasterData.I.Items[playerItem.ItemId];
+            var seed = MasterData.I.Seeds.Values.First(s => s.SeedItemId == item.Id);
+            gardenPlot.SeedId = seed.Id;
         }
     }
 }

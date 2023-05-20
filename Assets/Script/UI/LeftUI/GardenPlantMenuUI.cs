@@ -4,7 +4,7 @@ using CoreData;
 
 public class GardenPlantMenuUI : ListMenuBase
 {
-    public override void Initialize(SaveData saveData)
+    public override void Initialize(SaveData saveData, State state)
     {
         var gardenPlots = saveData.Garden.GardenPlots;
         var contexts = gardenPlots.Select((p, index) => new ListMenuElement.Context { Text = $"はたけ{index}"});
@@ -13,12 +13,6 @@ public class GardenPlantMenuUI : ListMenuBase
 
     public override State NextState()
     {
-        return CurrentSelectIndex switch
-        {
-            0 => new Garden(),
-            1 => new Item(),
-            2 => new Shop(),
-            _ => new Garden()
-        };
+        return new GardenPlantSelectSeed { GardenPlotIndex = CurrentSelectIndex };
     }
 }

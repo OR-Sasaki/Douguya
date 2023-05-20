@@ -2,6 +2,7 @@
 using CoreData;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RightUIPresenter : MonoBehaviour
 {
@@ -10,14 +11,16 @@ public class RightUIPresenter : MonoBehaviour
     [SerializeField] NoneRightUI none;
     [SerializeField] GardenPlotRightUI gardenPlot;
     [SerializeField] GameRightUI game;
-    [SerializeField] PlayerItemRightUI playerItemRightUI;
+    [SerializeField] PlayerItemRightUI playerItem;
+    [SerializeField] SeedRightUI seed;
 
     void DisableAll()
     {
         none.gameObject.SetActive(false);
         gardenPlot.gameObject.SetActive(false);
         game.gameObject.SetActive(false);
-        playerItemRightUI.gameObject.SetActive(false);
+        playerItem.gameObject.SetActive(false);
+        seed.gameObject.SetActive(false);
     }
     
     public void OnChangeHover(int value)
@@ -36,8 +39,8 @@ public class RightUIPresenter : MonoBehaviour
             GardenView _ => gardenPlot,
             GardenPlant _ => gardenPlot,
             GardenHarvest _ => gardenPlot,
-            GardenPlantSelectSeed _ => gardenPlot,
-            Item _ => playerItemRightUI,
+            GardenPlantSelectSeed _ => seed,
+            Item _ => playerItem,
             _ => none
         };
         currentUI.gameObject.SetActive(true);

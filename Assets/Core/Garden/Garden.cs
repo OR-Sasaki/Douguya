@@ -12,9 +12,9 @@ namespace Core
             }
         }
 
-        public static void Plant()
+        public static void Plant(SaveData saveData, int gardenPlotIndex, int playerItemIndex)
         {
-            
+            GardenPlot.Plant(saveData, saveData.Garden.GardenPlots[gardenPlotIndex], playerItemIndex);
         }
 
         public static void Harvest()

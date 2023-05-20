@@ -18,9 +18,21 @@ public class StateManager
     public void GoNextState(State state)
     {
         if (state is None) return;
-        
-        stateStack.Push(state);
-        onChangeStateSubject.OnNext(state);
+
+        if (state.Back)
+        {
+            // 指定されたStateまでもどる
+            while (stateStack.Count > 1 && stateStack.Peek().GetType() != state.GetType())
+            {
+                stateStack.Pop();
+            }
+            onChangeStateSubject.OnNext(stateStack.Peek());
+        }
+        else
+        {
+            stateStack.Push(state);
+            onChangeStateSubject.OnNext(state);
+        }
     }
 
     public void GoPrevState()

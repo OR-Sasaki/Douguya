@@ -39,6 +39,12 @@ public class DebugSceneManager : MonoBehaviour
             stateManager.Initialize();
         });
 
+        leftUIPresenter.OnPlant.Subscribe(value =>
+        {
+            var action = (PlantActionContext)value;
+            Core.Garden.Plant(saveData, action.GardenPlotIndex, action.PlayerItemIndex);
+        });
+
         stateManager.OnChangeState.Subscribe(state =>
         {
             leftUIPresenter.Next(state, saveData);

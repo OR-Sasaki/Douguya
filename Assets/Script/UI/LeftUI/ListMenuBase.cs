@@ -10,9 +10,12 @@ public abstract class ListMenuBase : UIBase
     [SerializeField] ListMenuElement elementPrefab;
     List<ListMenuElement> elements = new();
 
-    public abstract void Initialize(SaveData saveData);
+    public abstract void Initialize(SaveData saveData, State state);
     
     public abstract State NextState();
+
+    public virtual string Action => null;
+    public virtual LeftUIActionContext ActionValue => null;
 
     protected void SetContexts(IEnumerable<ListMenuElement.Context> contexts)
     {

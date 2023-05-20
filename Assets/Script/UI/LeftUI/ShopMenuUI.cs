@@ -3,7 +3,7 @@ using CoreData;
 
 public class ShopMenuUI : ListMenuBase
 {
-    public override void Initialize(SaveData saveData)
+    public override void Initialize(SaveData saveData, State state)
     {
         SetContexts(new List<ListMenuElement.Context>
         {

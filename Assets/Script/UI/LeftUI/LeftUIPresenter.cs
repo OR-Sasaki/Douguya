@@ -20,10 +20,12 @@ public class LeftUIPresenter : MonoBehaviour
     readonly Subject<Unit> onReturnSubject = new();
     readonly Subject<int> onHoverChangeSubject = new();
     readonly Subject<Unit> onNextDaySubject = new();
+    readonly Subject<LeftUIActionContext> onPlantSubject = new();
     public IObservable<State> OnSelect => onSelectSubject;
     public IObservable<Unit> OnReturn => onReturnSubject;
     public IObservable<int> OnHoverChange => onHoverChangeSubject;
     public IObservable<Unit> OnNextDay => onNextDaySubject;
+    public IObservable<LeftUIActionContext> OnPlant => onPlantSubject;
 
     void Update()
     {
@@ -41,8 +43,7 @@ public class LeftUIPresenter : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            var nextState = currentListMenu.NextState();
-            onSelectSubject.OnNext(nextState);
+            Enter();
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -53,6 +54,28 @@ public class LeftUIPresenter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             onNextDaySubject.OnNext(Unit.Default);
+        }
+    }
+
+    void Enter()
+    {
+        var action = currentListMenu.Action;
+        if (action != null)
+        {
+            Action(action, currentListMenu.ActionValue);
+        }
+        
+        var nextState = currentListMenu.NextState();
+        onSelectSubject.OnNext(nextState);
+    }
+
+    void Action(string action, LeftUIActionContext actionValue)
+    {
+        switch (action)
+        {
+            case "Plant":
+                onPlantSubject.OnNext(actionValue);
+                break;
         }
     }
 
@@ -72,7 +95,7 @@ public class LeftUIPresenter : MonoBehaviour
             GardenPlantSelectSeed _ => gardenPlantSelectSeedMenuUI,
             GardenHarvest _ => gardenHarvestMenuUI
         };
-        currentListMenu.Initialize(saveData);
+        currentListMenu.Initialize(saveData, state);
         currentListMenu.gameObject.SetActive(true);
     }
 }
