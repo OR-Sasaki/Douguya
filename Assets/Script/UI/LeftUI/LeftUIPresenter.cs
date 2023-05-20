@@ -3,30 +3,38 @@ using CoreData;
 using UniRx;
 using UnityEngine;
 
-public class Presenter : MonoBehaviour
+public class LeftUIPresenter : MonoBehaviour
 {
     [SerializeField] MainMenuUI mainMenuUI;
     [SerializeField] ItemMenuUI itemMenuUI;
     [SerializeField] GardenMenuUI gardenMenuUI;
     [SerializeField] ShopMenuUI shopMenuUI;
-
+    [SerializeField] GardenHarvestMenuUI gardenHarvestMenuUI;
+    [SerializeField] GardenPlantMenuUI gardenPlantMenuUI;
+    [SerializeField] GardenViewMenuUI gardenViewMenuUI;
+    [SerializeField] GardenPlantSelectSeedMenuUI gardenPlantSelectSeedMenuUI;
+    
     ListMenuBase currentListMenu;
 
     readonly Subject<State> onSelectSubject = new();
     readonly Subject<Unit> onReturnSubject = new();
+    readonly Subject<int> onHoverChangeSubject = new();
     public IObservable<State> OnSelect => onSelectSubject;
     public IObservable<Unit> OnReturn => onReturnSubject;
-
+    public Subject<int> OnHoverChange => onHoverChangeSubject;
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
             currentListMenu.Next();
+            OnHoverChange.OnNext(currentListMenu.CurrentSelectIndex);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             currentListMenu.Prev();
+            OnHoverChange.OnNext(currentListMenu.CurrentSelectIndex);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -48,10 +56,14 @@ public class Presenter : MonoBehaviour
         
         currentListMenu = state switch
         {
-            Main main => mainMenuUI,
-            Item item => itemMenuUI,
-            Shop shop => shopMenuUI,
-            Garden garden => gardenMenuUI,
+            Main _ => mainMenuUI,
+            Item _ => itemMenuUI,
+            Shop _ => shopMenuUI,
+            Garden _ => gardenMenuUI,
+            GardenView _ => gardenViewMenuUI,
+            GardenPlant _ => gardenPlantMenuUI,
+            GardenPlantSelectSeed _ => gardenPlantSelectSeedMenuUI,
+            GardenHarvest _ => gardenHarvestMenuUI
         };
         currentListMenu.Initialize(saveData);
         currentListMenu.gameObject.SetActive(true);

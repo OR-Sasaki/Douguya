@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CoreData;
 
 public class GardenMenuUI : ListMenuBase
@@ -9,15 +10,15 @@ public class GardenMenuUI : ListMenuBase
         {
             new()
             {
-                Text = "はたけ１"
+                Text = "見る"
             },
             new()
             {
-                Text = "はたけ２"
+                Text = "植える"
             },
             new()
             {
-                Text = "はたけ３"
+                Text = "収穫する"
             }
         });
     }
@@ -26,9 +27,9 @@ public class GardenMenuUI : ListMenuBase
     {
         return CurrentSelectIndex switch
         {
-            0 => new Garden(),
-            1 => new Item(),
-            2 => new Shop(),
+            0 => new GardenView(),
+            1 => new GardenPlant(),
+            2 => new GardenHarvest(),
             _ => new Garden()
         };
     }

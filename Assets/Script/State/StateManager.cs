@@ -17,6 +17,8 @@ public class StateManager
 
     public void GoNextState(State state)
     {
+        if (state is None) return;
+        
         stateStack.Push(state);
         onChangeStateSubject.OnNext(state);
     }

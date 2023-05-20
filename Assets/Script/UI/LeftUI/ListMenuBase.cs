@@ -14,7 +14,7 @@ public abstract class ListMenuBase : UIBase
     
     public abstract State NextState();
 
-    protected void SetContexts(List<ListMenuElement.Context> contexts)
+    protected void SetContexts(IEnumerable<ListMenuElement.Context> contexts)
     {
         RemoveAll();
         foreach (var context in contexts)
