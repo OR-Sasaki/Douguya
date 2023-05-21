@@ -9,4 +9,8 @@ public class NoneRightUI : RightUIBase
     public override void Select(int value)
     {
     }
+    
+    public override void Clear()
+    {
+    }
 }

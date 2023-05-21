@@ -22,4 +22,9 @@ public class PlayerItemRightUI : RightUIBase
         var item = MasterData.I.Items[playerItem.ItemId];
         text.text += JsonUtility.ToJson(item);
     }
+    
+    public override void Clear()
+    {
+        text.text = "";
+    }
 }

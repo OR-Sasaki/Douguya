@@ -17,9 +17,9 @@ namespace Core
             GardenPlot.Plant(saveData, saveData.Garden.GardenPlots[gardenPlotIndex], playerItemIndex);
         }
 
-        public static void Harvest()
+        public static int Harvest(SaveData saveData, int gardenPlotIndex)
         {
-            
+            return GardenPlot.Harvest(saveData, saveData.Garden.GardenPlots[gardenPlotIndex]);
         }
     }
 }

@@ -5,18 +5,24 @@ using UnityEngine;
 public abstract class ListMenuBase : UIBase
 {
     int currentSelectIndex = 0;
-    public int CurrentSelectIndex => currentSelectIndex;
+    public int CurrentSelectIndex => ElementExist ? currentSelectIndex : -1;
     
     [SerializeField] ListMenuElement elementPrefab;
     List<ListMenuElement> elements = new();
 
-    public abstract void Initialize(SaveData saveData, State state);
+    public void Initialize(SaveData saveData, State state)
+    {
+        currentSelectIndex = 0;
+        InitializeImp(saveData, state);
+    }
+    
+    public abstract void InitializeImp(SaveData saveData, State state);
     
     public abstract State NextState();
 
     public virtual string Action => null;
     public virtual LeftUIActionContext ActionValue => null;
-    public bool CanEnter => elements.Count > 0;
+    public bool ElementExist => elements.Count > 0;
     
     public virtual int RightValue => CurrentSelectIndex;
 

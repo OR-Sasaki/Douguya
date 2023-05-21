@@ -26,6 +26,13 @@ public class RightUIPresenter : MonoBehaviour
     public void OnChangeHover(int value)
     {
         if (!currentUI) return;
+        
+        if (value < 0)
+        {
+            currentUI.Clear();
+            return;
+        }
+        
         currentUI.Select(value);
     }
     
@@ -45,6 +52,5 @@ public class RightUIPresenter : MonoBehaviour
         };
         currentUI.gameObject.SetActive(true);
         currentUI.Initialize(saveData);
-        OnChangeHover(0);
     }
 }

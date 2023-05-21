@@ -5,7 +5,7 @@ using CoreData.Master;
 
 public class ItemMenuUI : ListMenuBase
 {
-    public override void Initialize(SaveData saveData, State state)
+    public override void InitializeImp(SaveData saveData, State state)
     {
         var playerItems = saveData.Player.PlayerItems;
         var contexts = playerItems.Select((item, index)

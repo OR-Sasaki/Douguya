@@ -6,7 +6,7 @@ public class GardenPlantMenuUI : ListMenuBase
 {
     IEnumerable<int> plots;
 
-    public override void Initialize(SaveData saveData, State state)
+    public override void InitializeImp(SaveData saveData, State state)
     {
         plots =
             saveData
@@ -25,5 +25,5 @@ public class GardenPlantMenuUI : ListMenuBase
         return new GardenPlantSelectSeed { GardenPlotIndex = plots.ToArray()[CurrentSelectIndex] };
     }
 
-    public override int RightValue => plots.ToArray()[CurrentSelectIndex];
+    public override int RightValue =>  ElementExist ?  plots.ToArray()[CurrentSelectIndex] : -1;
 }

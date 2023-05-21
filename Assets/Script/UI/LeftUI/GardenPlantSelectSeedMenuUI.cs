@@ -17,7 +17,7 @@ public class GardenPlantSelectSeedMenuUI : ListMenuBase
             GardenPlotIndex = state.GardenPlotIndex
         };
 
-    public override void Initialize(SaveData saveData, State state)
+    public override void InitializeImp(SaveData saveData, State state)
     {
         this.state = (GardenPlantSelectSeed)state;
         
@@ -39,5 +39,5 @@ public class GardenPlantSelectSeedMenuUI : ListMenuBase
         return new Garden{ Back = true };
     }
 
-    public override int RightValue => items.ToArray()[CurrentSelectIndex];
+    public override int RightValue => ElementExist ? items.ToArray()[CurrentSelectIndex] : -1;
 }

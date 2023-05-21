@@ -15,4 +15,9 @@ public class GameRightUI : RightUIBase
     public override void Select(int value)
     {
     }
+
+    public override void Clear()
+    {
+        text.text = "";
+    }
 }

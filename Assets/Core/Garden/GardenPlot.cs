@@ -33,5 +33,13 @@ namespace Core
             var seed = MasterData.I.Seeds.Values.First(s => s.SeedItemId == item.Id);
             gardenPlot.SeedId = seed.Id;
         }
+
+        public static int Harvest(SaveData saveData, CoreData.GardenPlot gardenPlot)
+        {
+            var seed = MasterData.I.Seeds[gardenPlot.SeedId];
+            var harvestItem = seed.RotHarvest();
+            saveData.Player.PlayerItems[harvestItem] = new PlayerItem { ItemId = harvestItem, Quality = 1 };
+            return harvestItem;
+        }
     }
 }

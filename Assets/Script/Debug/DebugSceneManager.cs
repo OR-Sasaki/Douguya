@@ -45,10 +45,16 @@ public class DebugSceneManager : MonoBehaviour
             Core.Garden.Plant(saveData, action.GardenPlotIndex, action.PlayerItemIndex);
         });
 
+        leftUIPresenter.OnHarvest.Subscribe(value =>
+        {
+            var action = (HarvestActionContext)value;
+            var item = Core.Garden.Harvest(saveData, action.GardenPlotIndex);
+        });
+
         stateManager.OnChangeState.Subscribe(state =>
         {
-            leftUIPresenter.Next(state, saveData);
             rightUIPresenter.Next(state, saveData);
+            leftUIPresenter.Next(state, saveData);
         });
 
         stateManager.Initialize();

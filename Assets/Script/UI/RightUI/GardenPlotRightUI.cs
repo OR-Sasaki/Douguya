@@ -18,4 +18,9 @@ public class GardenPlotRightUI : RightUIBase
         var plot = saveData.Garden.GardenPlots[value];
         text.text = JsonMapper.ToJson(plot);
     }
+    
+    public override void Clear()
+    {
+        text.text = "";
+    }
 }
