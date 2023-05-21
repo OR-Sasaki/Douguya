@@ -8,13 +8,13 @@ namespace Core
     {
         public static void NextDay(CoreData.GardenPlot gardenPlot)
         {
-            if (gardenPlot.SeedId == 0)
+            if (gardenPlot.SeedId <= 0)
                 return;
             
             gardenPlot.ElapsedDaysInCurrentProgress += 1;
-
-            if (gardenPlot.CurrentProgress == CoreData.GardenPlot.Progress.Collectable) return;
             
+            if (gardenPlot.CurrentProgress == CoreData.GardenPlot.Progress.Collectable) return;
+
             var seed = MasterData.I.Seeds[gardenPlot.SeedId];
             var needDaysForNextProgress = seed.NeedDaysForNextProgress(gardenPlot.CurrentProgress);
             if (gardenPlot.ElapsedDaysInCurrentProgress >= needDaysForNextProgress)
@@ -38,8 +38,17 @@ namespace Core
         {
             var seed = MasterData.I.Seeds[gardenPlot.SeedId];
             var harvestItem = seed.RotHarvest();
-            saveData.Player.PlayerItems[harvestItem] = new PlayerItem { ItemId = harvestItem, Quality = 1 };
+            saveData.Player.PlayerItems.Add(new PlayerItem { ItemId = harvestItem, Quality = 1 });
+
+            Initialize(gardenPlot);
             return harvestItem;
+        }
+
+        static void Initialize(CoreData.GardenPlot gardenPlot)
+        {
+            gardenPlot.SeedId = -1;
+            gardenPlot.CurrentProgress = CoreData.GardenPlot.Progress.None;
+            gardenPlot.ElapsedDaysInCurrentProgress = 0;
         }
     }
 }
