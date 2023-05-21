@@ -75,6 +75,16 @@ public class DebugSceneManager : MonoBehaviour
         });
         player.PlayerItems.Add(new PlayerItem
         {
+            ItemId = 2,
+            Quality = 2,
+        });
+        player.PlayerItems.Add(new PlayerItem
+        {
+            ItemId = 2,
+            Quality = 3,
+        });
+        player.PlayerItems.Add(new PlayerItem
+        {
             ItemId = 3,
             Quality = 1,
         });

@@ -32,13 +32,13 @@ public class LeftUIPresenter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             currentListMenu.Next();
-            onHoverChangeSubject.OnNext(currentListMenu.CurrentSelectIndex);
+            onHoverChangeSubject.OnNext(currentListMenu.RightValue);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             currentListMenu.Prev();
-            onHoverChangeSubject.OnNext(currentListMenu.CurrentSelectIndex);
+            onHoverChangeSubject.OnNext(currentListMenu.RightValue);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))

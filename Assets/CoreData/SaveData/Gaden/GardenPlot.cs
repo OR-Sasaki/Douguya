@@ -11,7 +11,7 @@ namespace CoreData
             Collectable,
         }
         
-        public int SeedId;
+        public int SeedId = -1;
         public Progress CurrentProgress = Progress.None;
         public int ElapsedDaysInCurrentProgress = 0;
     }

@@ -5,7 +5,6 @@ using CoreData.Master;
 
 public class GardenPlantSelectSeedMenuUI : ListMenuBase
 {
-    SaveData saveData;
     IEnumerable<int> items;
     GardenPlantSelectSeed state;
 
@@ -20,7 +19,6 @@ public class GardenPlantSelectSeedMenuUI : ListMenuBase
 
     public override void Initialize(SaveData saveData, State state)
     {
-        this.saveData = saveData;
         this.state = (GardenPlantSelectSeed)state;
         
         items =
@@ -40,4 +38,6 @@ public class GardenPlantSelectSeedMenuUI : ListMenuBase
     {
         return new Garden{ Back = true };
     }
+
+    public override int RightValue => items.ToArray()[CurrentSelectIndex];
 }
