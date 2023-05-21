@@ -59,6 +59,9 @@ public class LeftUIPresenter : MonoBehaviour
 
     void Enter()
     {
+        if (!currentListMenu.CanEnter)
+            return;
+        
         var action = currentListMenu.Action;
         if (action != null)
         {

@@ -16,6 +16,7 @@ public abstract class ListMenuBase : UIBase
 
     public virtual string Action => null;
     public virtual LeftUIActionContext ActionValue => null;
+    public bool CanEnter => elements.Count > 0;
 
     protected void SetContexts(IEnumerable<ListMenuElement.Context> contexts)
     {
@@ -33,6 +34,8 @@ public abstract class ListMenuBase : UIBase
 
     protected void Select(int selectIndex)
     {
+        if (elements.Count <= 0) return;
+        
         elements[currentSelectIndex].UnSelected();
         currentSelectIndex = selectIndex;
         elements[currentSelectIndex].Selected();
